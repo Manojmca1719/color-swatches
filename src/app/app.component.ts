@@ -9,6 +9,7 @@ import {
   faDownload,
   faPalette,
   faShuffle,
+  faEllipsis
 } from '@fortawesome/free-solid-svg-icons';
 import { colord, extend } from 'colord';
 import mixPlugin from 'colord/plugins/mix';
@@ -32,12 +33,14 @@ export class AppComponent {
   @ViewChild('downloadLink') public downloadLink!: ElementRef;
 
   public displayColors: Array<string> = [];
+  public curColorSwatches: Array<string> = [];
   public curColorCode: string = '';
   public faShuffle = faShuffle;
   public faCopy = faCopy;
   public faPalette = faPalette;
   public faDownload = faDownload;
   public faHeart = faHeart;
+  public faEllipsis = faEllipsis;
   public faArrowUpFromBracket = faArrowUpFromBracket;
   public colorPalleteOffsetStart: number = 0;
   public colorPalleteOffsetEnd: number = 0;
@@ -142,5 +145,19 @@ export class AppComponent {
       this.downloadLink.nativeElement.download = 'marble-diagram.png';
       this.downloadLink.nativeElement.click();
     });
+  }
+
+  public generateSwatches(color: any) {
+    this.curColorSwatches = [];
+    let darken = colord(color)
+      .shades(5)
+      .map((c) => c.toHex().toUpperCase());
+    let lighten = colord(color)
+      .tones(6)
+      .map((c) => c.toHex().toUpperCase());
+    lighten.reverse().pop();
+    this.curColorSwatches.push(...darken);
+    this.curColorSwatches.unshift(...lighten);
+    console.log(this.curColorSwatches);
   }
 }

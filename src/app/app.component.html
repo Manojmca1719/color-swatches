@@ -6,9 +6,29 @@
           (click)="addColorEvent($event)">
           @for (item of displayColors; track $index) {
           <div class="palletes" [style.background-color]="item">
-            <div class="copy-code">
-              <fa-icon [icon]="faCopy" (click)="copyColorCode(item)"></fa-icon>
-            </div>
+            @if(!curColorSwatches.includes(item)){
+              <div class="overlay-items">
+                <div class="drop-ellipse">
+                  <fa-icon [icon]="faEllipsis" (click)="generateSwatches(item)"></fa-icon>
+                </div>
+                <div class="copy-code">
+                  <fa-icon [icon]="faCopy" (click)="copyColorCode(item)"></fa-icon>
+                </div>
+              </div>
+              } @else{
+              <div class="swatches-grid">
+                @for(swatches of curColorSwatches;track $index){
+                <div class="swatch" [style.backgroundColor]="swatches">
+                   <!-- @if(swatches === item){
+                  <div class="text-center fw-bold" style="font-size: 30px;color: #fff;"><sup>.</sup></div>
+                } -->
+                <div class="copy-swatches">
+                  <fa-icon [icon]="faCopy" (click)="copyColorCode(swatches)"></fa-icon>
+                </div>
+                </div>
+                }
+              </div>
+              }
           </div>
           }
         </div>
@@ -46,7 +66,7 @@
 
 </div>
 
-<div id="download" hidden>
+<div id="download">
   <img #canvas>
   <a #downloadLink></a>
 </div>
