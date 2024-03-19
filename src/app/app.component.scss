@@ -1,167 +1,232 @@
 .page-container {
-    height: 100vh;
-    overflow: hidden;
-    .color-palletes {
-      display: flex;
+  height: 100vh;
+  overflow: hidden;
+
+  .color-palletes {
+    display: flex;
+    position: relative;
+
+    .palletes {
+      width: 200px;
+      height: 300px;
+      // border: 1px solid black;
+      border-radius: 5px;
+      margin: 0 5px;
       position: relative;
-  
-      .palletes {
-        width: 200px;
-        height: 300px;
-        // border: 1px solid black;
-        border-radius: 5px;
-        margin: 0 5px;
-        position: relative;
-  
+
+      .overlay-items {
+        height: 100%;
+        width: 100%;
+        opacity: 0;
+        transition: 0.3s;
+        background-color: rgba(0, 0, 0, 0.2);
+        position: absolute;
+        z-index: 1;
+
+        .drop-ellipse {
+          color: #fff;
+          font-size: 18px;
+          position: absolute;
+          right: 10px;
+          top: 5px;
+        }
+
         .copy-code {
+          color: #fff;
+          font-size: 30px;
           display: flex;
           align-items: center;
           justify-content: center;
           height: 100%;
-          color: #fff;
-          font-size: 30px;
-          background-color: rgba(0, 0, 0, 0.2);
-          opacity: 0;
-          transition: 0.3s;
+          z-index: 2;
         }
-  
-        &:hover {
-          .copy-code {
-            opacity: 1;
+      }
+
+      .swatches-grid {
+        display: flex;
+        flex-direction: column;
+
+        .swatch {
+          height: 30px;
+          position: relative;
+          box-shadow:
+            rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+            rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+            rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+
+          &:first-child {
+            border-radius: 5px 5px 0 0;
+          }
+
+          &:last-child {
+            border-radius: 0 0 5px 5px;
+          }
+
+          .copy-swatches {
+            color: #fff;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
             transition: 0.3s;
+          }
+
+          &:hover {
+            .copy-swatches {
+              opacity: 1;
+              transition: 0.3s;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+
+      &:hover {
+        .overlay-items {
+          opacity: 1;
+          transition: 0.3s;
+
+          .drop-ellipse {
+            cursor: pointer;
+          }
+
+          .copy-code {
             cursor: pointer;
           }
         }
       }
-  
-      &:before,
-      &:after {
-        content: "+" !important;
-        width: 100px;
-        background: #757575;
-        color: white;
-        font-size: 30px;
-        font-weight: bold;
-        height: 200px;
-        content: "";
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        margin: auto;
-        cursor: pointer;
-      }
-  
-      &:before {
-        left: -100px;
-        border-radius: 5px 0 0 5px;
-      }
-  
-      &:after {
-        right: -100px;
-        border-radius: 0 5px 5px 0;
-      }
     }
-  
-    .button-container {
+
+    &:before,
+    &:after {
+      content: "+" !important;
+      width: 100px;
+      background: #757575;
+      color: white;
+      font-size: 30px;
+      font-weight: bold;
+      height: 200px;
+      content: "";
       display: flex;
+      align-items: center;
       justify-content: center;
-      margin-top: 20px;
-    }
-  
-    // .container {
-    //   background-color: white;
-    //   display: flex;
-    //   height: auto;
-    //   width: 100%;
-    //   flex-direction: column;
-    //   justify-content: center;
-    //   align-items: center;
-    //   position: absolute;
-    //   bottom: 0;
-    // }
-  
-    // .semicircle4 {
-    //   background-color: green;
-    //   height: 140px;
-    //   width: 280px;
-    //   top: 20px;
-    //   left: 20px;
-    //   border-radius: 275px 275px 0 0;
-    //   position: relative;
-    // }
-  
-    // .semicircle5 {
-    //   background-color: blue;
-    //   height: 120px;
-    //   width: 240px;
-    //   top: 20px;
-    //   left: 20px;
-    //   border-radius: 275px 275px 0 0;
-    //   position: relative;
-    // }
-  
-    // .semicircle6 {
-    //   background-color: indigo;
-    //   height: 100px;
-    //   width: 200px;
-    //   top: 20px;
-    //   left: 20px;
-    //   border-radius: 275px 275px 0 0;
-    //   position: relative;
-    // }
-  
-    // .semicircle7 {
-    //   background-color: violet;
-    //   height: 80px;
-    //   width: 160px;
-    //   top: 20px;
-    //   left: 20px;
-    //   border-radius: 275px 275px 0 0;
-    //   position: relative;
-    // }
-  
-    // .semicircle8 {
-    //   background-color: white;
-    //   height: 60px;
-    //   width: 120px;
-    //   top: 20px;
-    //   left: 20px;
-    //   border-radius: 275px 275px 0 0;
-    //   position: relative;
-    // }
-  
-    .copyToClipboardToast {
-      background-color: rgb(59, 117, 59);
-      color: #fff;
-      font-size: 16px;
       position: absolute;
-    }
-  
-    .toastOnShow {
-      bottom: 10px;
-      left: 0;
-      right: 0;
+      top: 0;
+      bottom: 0;
       margin: auto;
-      transition: 0.5s;
+      cursor: pointer;
     }
-  
-    .toastOnHide {
-      bottom: -80px;
-      left: 0;
-      right: 0;
-      margin: auto;
-      transition: 0.5s;
+
+    &:before {
+      left: -100px;
+      border-radius: 5px 0 0 5px;
     }
-  
-    .color-picker {
-      font-size: 24px;
+
+    &:after {
+      right: -100px;
+      border-radius: 0 5px 5px 0;
     }
-  
-    // #colorPicker {
-    //   display: none;
-    // }
   }
-  
+
+  .button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  // .container {
+  //   background-color: white;
+  //   display: flex;
+  //   height: auto;
+  //   width: 100%;
+  //   flex-direction: column;
+  //   justify-content: center;
+  //   align-items: center;
+  //   position: absolute;
+  //   bottom: 0;
+  // }
+
+  // .semicircle4 {
+  //   background-color: green;
+  //   height: 140px;
+  //   width: 280px;
+  //   top: 20px;
+  //   left: 20px;
+  //   border-radius: 275px 275px 0 0;
+  //   position: relative;
+  // }
+
+  // .semicircle5 {
+  //   background-color: blue;
+  //   height: 120px;
+  //   width: 240px;
+  //   top: 20px;
+  //   left: 20px;
+  //   border-radius: 275px 275px 0 0;
+  //   position: relative;
+  // }
+
+  // .semicircle6 {
+  //   background-color: indigo;
+  //   height: 100px;
+  //   width: 200px;
+  //   top: 20px;
+  //   left: 20px;
+  //   border-radius: 275px 275px 0 0;
+  //   position: relative;
+  // }
+
+  // .semicircle7 {
+  //   background-color: violet;
+  //   height: 80px;
+  //   width: 160px;
+  //   top: 20px;
+  //   left: 20px;
+  //   border-radius: 275px 275px 0 0;
+  //   position: relative;
+  // }
+
+  // .semicircle8 {
+  //   background-color: white;
+  //   height: 60px;
+  //   width: 120px;
+  //   top: 20px;
+  //   left: 20px;
+  //   border-radius: 275px 275px 0 0;
+  //   position: relative;
+  // }
+
+  .copyToClipboardToast {
+    background-color: rgb(59, 117, 59);
+    color: #fff;
+    font-size: 16px;
+    position: absolute;
+  }
+
+  .toastOnShow {
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    transition: 0.5s;
+  }
+
+  .toastOnHide {
+    bottom: -80px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    transition: 0.5s;
+  }
+
+  .color-picker {
+    font-size: 24px;
+  }
+
+  // #colorPicker {
+  //   display: none;
+  // }
+}
